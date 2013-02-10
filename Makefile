@@ -290,8 +290,10 @@ all $(obj)u-boot.hex $(obj)u-boot.srec $(obj)u-boot.bin \
 $(obj)u-boot.img $(obj)u-boot.dis $(obj)u-boot \
 $(SUBDIRS) version gdbtools updater env depend \
 dep tags ctags etags $(obj)System.map:
-	@echo "System not configured - make smdk6410_config" >&2
-	@ exit 1
+	@echo "System not configured: " >&2
+	@echo "                      make smdk6410_SDBOOT_config" >&2
+	@echo "                      make smdk6410_NANDBOOT_config" >&2
+	@exit 1
 endif
 
 .PHONY : CHANGELOG
@@ -1900,8 +1902,14 @@ tabla_config	:	unconfig
 smdk6400_config	:	unconfig
 	@$(MKCONFIG) $(@:_config=) arm s3c64xx smdk6400 samsung s3c6400 
 
-smdk6410_config	:	unconfig
-	@$(MKCONFIG) $(@:_config=) arm s3c64xx smdk6410 samsung s3c6410 
+smdk6410_SDBOOT_config	:	unconfig
+	@$(MKCONFIG) $(@:_SDBOOT_config=) arm s3c64xx smdk6410 samsung s3c6410 
+	@sed -i '1a#define CONFIG_BOOT_MOVINAND' include/config.h
+
+smdk6410_NANDBOOT_config	:	unconfig
+	@$(MKCONFIG) $(@:_NANDBOOT_config=) arm s3c64xx smdk6410 samsung s3c6410 
+	@sed -i '1a#define CONFIG_BOOT_NAND' include/config.h
+
 
 smdk6430_config :       unconfig
 	@$(MKCONFIG) $(@:_config=) arm s3c64xx smdk6430 samsung s3c6430
