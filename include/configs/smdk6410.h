@@ -438,8 +438,9 @@
 
 /* Boot configuration (define only one of next) */
 
-#define CONFIG_BOOT_NAND
+//#define CONFIG_BOOT_NAND
 #define	CONFIG_NAND
+#define CONFIG_MOVINAND
 
 /*
  * BL1 should be written in the block0 with 8 bit ecc parity codes
@@ -459,6 +460,7 @@
 
 #define CONFIG_BOOTCOMMAND	"nand read 0xc0008000 0x100000 0x500000;bootm 0xc0008000"
 #elif defined(CONFIG_BOOT_MOVINAND)
+#define CFG_NAND_HWECC
 #define CFG_ENV_IS_IN_MOVINAND
 #define CONFIG_BOOTCOMMAND	"movi read kernel c0008000;movi read rootfs c0800000;bootm c0008000"
 
