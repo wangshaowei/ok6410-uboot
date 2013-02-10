@@ -23,7 +23,7 @@
 PLATFORM_RELFLAGS += -fno-strict-aliasing  -fno-common -ffixed-r8 \
 	-msoft-float
 
-PLATFORM_CPPFLAGS += -march=armv6 -mcpu=arm1176jzf-s
+PLATFORM_CPPFLAGS += -mcpu=arm1176jzf-s
 # =========================================================================
 #
 # Supply options according to compiler version

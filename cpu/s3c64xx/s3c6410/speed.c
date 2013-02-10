@@ -124,7 +124,7 @@ int print_cpuinfo(void)
 	printf("****************************************\r\n");
 	printf("**    u-boot 1.1.6-mtx                **\r\n");
 	printf("**    Updated for MTX-node dev Board  **\r\n");
-	printf("**    Version 0.1 (2013-01-09)        **\r\n");
+	printf("**    Version 0.1 (2013-02-09)        **\r\n");
 	printf("****************************************\r\n");
 
 	printf("\nCPU:     S3C6410 @%dMHz\n", get_ARMCLK()/1000000);
