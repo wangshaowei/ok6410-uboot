@@ -21,10 +21,10 @@
 # MA 02111-1307 USA
 #
 
-BIN_FILES	= img2srec$(SFX) mkimage$(SFX) envcrc$(SFX) gen_eth_addr$(SFX) bmp_logo$(SFX)
+BIN_FILES	= img2srec$(SFX) mkimage$(SFX) envcrc$(SFX) gen_eth_addr$(SFX) bmp_logo$(SFX) s3c6410_burnSD$(SFX) dnw$(SFX)
 
 OBJ_LINKS	= environment.o crc32.o
-OBJ_FILES	= img2srec.o mkimage.o envcrc.o gen_eth_addr.o bmp_logo.o
+OBJ_FILES	= img2srec.o mkimage.o envcrc.o gen_eth_addr.o bmp_logo.o s3c6410_burnSD.o dnw.o
 
 ifeq ($(ARCH),mips)
 BIN_FILES	+= inca-swap-bytes$(SFX)
@@ -157,6 +157,13 @@ $(obj)mpc86x_clk$(SFX):	$(obj)mpc86x_clk.o
 		$(CC) $(CFLAGS) $(HOST_LDFLAGS) -o $@ $^
 		$(STRIP) $@
 
+$(obj)s3c6410_burnSD$(SFX): $(obj)s3c6410_burnSD.o
+		$(CC) $(CFLAGS) $(HOST_LDFLAGS) -o $@ $^
+		$(STRIP) $@
+
+$(obj)dnw$(SFX): $(obj)dnw.o
+	$(CC) $(CFLAGS) -lusb-1.0 -o $@ $^
+
 $(obj)envcrc.o:	$(src)envcrc.c
 		$(CC) -g $(CFLAGS) -c -o $@ $<
 
@@ -177,6 +184,12 @@ $(obj)inca-swap-bytes.o:	$(src)inca-swap-bytes.c
 
 $(obj)mpc86x_clk.o:	$(src)mpc86x_clk.c
 		$(CC) -g $(CFLAGS) -c -o $@ $<
+
+$(obj)s3c6410_burnSD.o: $(src)s3c6410_burnSD.c
+	$(CC) -g -std=gnu99 -D_FILE_OFFSET_BITS=64 -c -o $@ $<
+
+$(obj)dnw.o: $(src)dnw.c
+	$(CC) -g -std=gnu99 -c -o $@ $<
 
 subdirs:
 ifeq ($(TOOLSUBDIRS),)

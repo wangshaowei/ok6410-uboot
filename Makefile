@@ -2311,7 +2311,7 @@ clean:
 	      $(obj)examples/smc91111_eeprom $(obj)examples/interrupt \
 	      $(obj)examples/test_burst
 	rm -f $(obj)tools/img2srec $(obj)tools/mkimage $(obj)tools/envcrc \
-		$(obj)tools/gen_eth_addr
+		$(obj)tools/gen_eth_addr $(obj)tools/dnw $(obj)tools/s3c6410_burnSD
 	rm -f $(obj)tools/mpc86x_clk $(obj)tools/ncb
 	rm -f $(obj)tools/easylogo/easylogo $(obj)tools/bmp_logo
 	rm -f $(obj)tools/gdb/astest $(obj)tools/gdb/gdbcont $(obj)tools/gdb/gdbsend
